@@ -24,7 +24,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: yarn ci
+    - run: yarn --pure-lockfile
     - run: yarn run deploy
       env:
         CI: true
