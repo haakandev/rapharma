@@ -20,9 +20,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Gatsby Publish
-      uses: enriikke/gatsby-gh-pages-action@v2.1.1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
       with:
-        access-token: '${{ secrets.GITHUB_TOKEN }}'
-        deploy-branch: gh-pages
-        gatsby-args: --prefix-paths
+        node-version: ${{ matrix.node-version }}
+    - name: Install dependencies
+      run: yarn --pure-lockfile
+    - name: Build website
+      run: yarn build
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v2
+      env:
+        ACTIONS_DEPLOY_KEY: ${{ secrets.GITHUB_TOKEN }}
+        PUBLISH_BRANCH: gh-pages
+        PUBLISH_DIR: ./public
