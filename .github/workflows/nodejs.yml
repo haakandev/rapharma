@@ -20,15 +20,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Configure Git credentials
-      uses: oleksiyrudenko/gha-git-credentials@v1
+    - name: Gatsby Publish
+      uses: enriikke/gatsby-gh-pages-action@v2.1.1
       with:
-        token: '${{ secrets.GITHUB_TOKEN }}'
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: Install dependencies
-      run: yarn --pure-lockfile
-    - name: Deploy to GitHub Pages
-      run: yarn run deploy
+        access-token: '${{ secrets.GITHUB_TOKEN }}'
+        deploy-branch: gh-pages
+        gatsby-args: --prefix-paths
