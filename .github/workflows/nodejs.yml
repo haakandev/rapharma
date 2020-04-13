@@ -23,8 +23,6 @@ jobs:
     - name: Configure Git credentials
       uses: oleksiyrudenko/gha-git-credentials@v1
       with:
-        name: 'Håkan Sjölin'
-        email: 'hakan.sjolin@gmail.com'
         token: '${{ secrets.GITHUB_TOKEN }}'
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
